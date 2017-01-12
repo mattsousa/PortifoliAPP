@@ -1,6 +1,7 @@
 package br.com.bluedogs.econoapp.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,11 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import br.com.bluedogs.econoapp.R;
+import br.com.bluedogs.econoapp.model.User;
 
 public class PrincipalActivity extends AppCompatActivity {
-    private TextView txwState,txwValue;
+    private TextView txwState,txwValue,txwHistoryResult;
     private Button btnAdd,btnRemove;
     private RecyclerView rcvwHistory;
+
+    private User user;
 
     private final String TAG = "PRINCIPAL_ACTIVITY";
 
@@ -29,6 +33,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         txwState = (TextView)findViewById(R.id.main_txw_state);
         txwValue = (TextView)findViewById(R.id.main_txw_value);
+        txwHistoryResult = (TextView)findViewById(R.id.main_txw_history_result);
         btnAdd = (Button)findViewById(R.id.main_btn_add);
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
         rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
