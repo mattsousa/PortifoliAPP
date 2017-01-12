@@ -3,13 +3,23 @@ package br.com.bluedogs.econoapp;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class PrincipalActivity extends AppCompatActivity {
+    private TextView txwState,txwValue;
+    private Button btnAdd,btnRemove;
+    private RecyclerView rcvwHistory;
+
+    private final String TAG = "PRINCIPAL_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +28,27 @@ public class PrincipalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        txwState = (TextView)findViewById(R.id.main_txw_state);
+        txwValue = (TextView)findViewById(R.id.main_txw_value);
+        btnAdd = (Button)findViewById(R.id.main_btn_add);
+        btnRemove = (Button)findViewById(R.id.main_btn_remove);
+        rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 11/01/2017 Create a custom alert to get user's value
+                Log.i(TAG,"btnAdd Click Called!");
+            }
+        });
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 11/01/2017 Create a custom alert to get user's value
+                Log.i(TAG,"btnRemove Click Called!");
+            }
+        });
+        // TODO: 11/01/2017 Get the first 10 last operations from database and create a list
     }
 
     @Override
@@ -36,9 +67,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Log.i(TAG,"Settings Click Called!");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }

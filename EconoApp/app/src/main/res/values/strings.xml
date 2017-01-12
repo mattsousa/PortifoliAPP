@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">EconoApp</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Principal Activity Strings -->
+    <string name="main_greetings">Hello! Wellcome to EconoApp</string>
+    <string name="main_econohealth">EconoHealth: </string>
+    <string name="main_state">State</string>
+    <string name="main_value">$00,00</string>
+    <string name="main_historico">Last Changes</string>
+    <string name="main_add">Add Funds</string>
+    <string name="main_remove">Remove Funds</string>
+
+    <!-- Principal Activity Strings -->
 </resources>

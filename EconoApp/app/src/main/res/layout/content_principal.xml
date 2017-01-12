@@ -20,11 +20,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearLayout3">
+        >
 
 
         <TextView
-            android:text="TextView"
+            android:text="@string/main_greetings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/main_txw_greetings" />
@@ -32,7 +32,8 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/main_card_infos">
+            android:id="@+id/main_card_infos"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -45,33 +46,47 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="TextView"
+                        android:text="@string/main_econohealth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/main_txw_coin"
-                        android:layout_weight="1" />
+                        android:id="@+id/main_txw_econohealth"
+                        android:layout_weight="1"
+                        android:textSize="24sp"
+                        android:textAlignment="textEnd" />
 
                     <TextView
-                        android:text="TextView"
+                        android:text="@string/main_state"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/main_txw_local"
-                        android:layout_weight="1" />
+                        android:id="@+id/main_txw_state"
+                        android:layout_weight="1"
+                        android:textSize="24sp" />
                 </LinearLayout>
 
                 <TextView
-                    android:text="TextView"
+                    android:text="@string/main_value"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/main_txw_value" />
+                    android:id="@+id/main_txw_value"
+                    android:textAlignment="center"
+                    android:textSize="56sp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:text="@string/main_historico"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/main_txw_historico"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp" />
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main_rcvw_historico" />
+            android:id="@+id/main_rcvw_history"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,17 +97,17 @@
         android:layout_centerHorizontal="true">
 
         <Button
-            android:text="Button"
+            android:text="@string/main_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_btn_add"
             android:layout_weight="1" />
 
         <Button
-            android:text="Button"
+            android:text="@string/main_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/main_btn_sub"
+            android:id="@+id/main_btn_remove"
             android:layout_weight="1" />
     </LinearLayout>
 
