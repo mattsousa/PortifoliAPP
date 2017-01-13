@@ -1,6 +1,8 @@
 package br.com.bluedogs.econoapp.model;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class User {
     private double funds;
     private List<Operations> history;
 
-    public static final String DATE_FORMAT = "";
+    public static final String DATE_FORMAT = "yyyy.MM.dd ; HH:mm:ss";
 
     public User() {
         id = 0;
@@ -29,8 +31,8 @@ public class User {
      * */
     public void makeOperation(double value,boolean add){
         Operations operation = new Operations();
-        SimpleDateFormat format = new SimpleDateFormat();
-        operation.setDateAndTime(format.format(DATE_FORMAT));
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+        operation.setDateAndTime(format.format(new Date()));
         operation.setValue(value);
         if(add){
             addFunds(value);

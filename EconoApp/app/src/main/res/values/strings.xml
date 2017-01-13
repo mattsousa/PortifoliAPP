@@ -10,12 +10,17 @@
     <string name="main_history">History</string>
     <string name="main_add">Add Funds</string>
     <string name="main_remove">Remove Funds</string>
+    <string name="main_dialog_title">Pick a value</string>
+    <string name="main_dialog_positive">OK</string>
+    <string name="main_dialog_negative">Cancel</string>
     <string name="main_amount">R$00,00</string>
-    <string name="main_m1">+1</string>
-    <string name="main_m5">+5</string>
-    <string name="main_m10">+10</string>
-    <string name="main_m100">+100</string>
+    <string name="main_m1">1</string>
+    <string name="main_m5">5</string>
+    <string name="main_m10">10</string>
+    <string name="main_m100">100</string>
+
     <string name="main_mcustom">...</string>
+    <string name="main_custom_ok">Insert</string>
 
     <!-- Principal Activity Strings -->
 </resources>
