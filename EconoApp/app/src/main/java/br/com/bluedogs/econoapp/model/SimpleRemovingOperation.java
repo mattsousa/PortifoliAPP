@@ -5,4 +5,8 @@ package br.com.bluedogs.econoapp.model;
  */
 
 public class SimpleRemovingOperation implements OperationType {
+    @Override
+    public char getOperationType() {
+        return 'r';
+    }
 }

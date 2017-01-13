@@ -5,4 +5,8 @@ package br.com.bluedogs.econoapp.model;
  */
 
 public class SimpleAddingOperation implements OperationType {
+    @Override
+    public char getOperationType() {
+        return 'a';
+    }
 }

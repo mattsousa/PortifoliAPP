@@ -4,14 +4,14 @@ package br.com.bluedogs.econoapp.model;
  * Created by Sarah Francis on 12/01/2017.
  */
 
-public class Operations {
+public class Operation {
     private long id;
     private String dateAndTime;
     private OperationType type;
     private double value;
 
 
-    public Operations() {
+    public Operation() {
         id = 0;
         dateAndTime = "";
         type = null;

@@ -5,4 +5,5 @@ package br.com.bluedogs.econoapp.model;
  */
 
 public interface OperationType {
+    char getOperationType();
 }

@@ -14,8 +14,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.bluedogs.econoapp.R;
+import br.com.bluedogs.econoapp.db.UserDAO;
 import br.com.bluedogs.econoapp.model.User;
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -34,7 +36,7 @@ public class PrincipalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = new User();
+        user = UserDAO.getUser(getApplicationContext());
 
         txwState = (TextView)findViewById(R.id.main_txw_state);
         txwValue = (TextView)findViewById(R.id.main_txw_value);
@@ -42,6 +44,19 @@ public class PrincipalActivity extends AppCompatActivity {
         btnAdd = (Button)findViewById(R.id.main_btn_add);
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
         rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
+
+
+        if(user.getName().isEmpty()){
+            // TODO: 13/01/2017 Create custom alert to get user's name
+            user.setName("Matheus");//teste
+            UserDAO.insert(getApplicationContext(),user);
+            Log.i(TAG,"Data Object Access Called!");
+            Log.i(TAG,"Database Insertion Called!");
+        }else{
+            txwValue.setText("R$"+String.valueOf(user.getFunds()));
+            Toast.makeText(getApplicationContext(),"Name: "+user.getName(),Toast.LENGTH_SHORT).show();
+            Log.i(TAG,"Data Object Access Called!");
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +116,7 @@ public class PrincipalActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Log.i(TAG,"Dialog Operation OK clicked!");
                 user.makeOperation(amount,add);
+                //UserDAO.alter(getApplicationContext(),user.getId(),user);
                 txwValue.setText("R$"+user.getFunds());
                 amount = 0;
             }
