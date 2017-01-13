@@ -40,5 +40,12 @@ public class UserDAO {
         return user;
     }
 
-    // TODO: 13/01/2017 Make a method called "alter" that receives Context, int and User params
+    // TODO: 13/01/2017 Make a method called "alter" that receives a Context and User params
+    public static void alter(Context context,User user){
+        DAO dao = DAO.getInstance(context);
+        ContentValues values = new ContentValues();
+        values.put(coluns[1],user.getName());
+        values.put(coluns[2],user.getFunds());
+        dao.getWritableDatabase().update(DAO.TABELAS[0],values,null,null);
+    }
 }

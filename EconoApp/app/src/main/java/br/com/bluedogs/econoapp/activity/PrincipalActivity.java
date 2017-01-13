@@ -116,8 +116,9 @@ public class PrincipalActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Log.i(TAG,"Dialog Operation OK clicked!");
                 user.makeOperation(amount,add);
-                //UserDAO.alter(getApplicationContext(),user.getId(),user);
+                UserDAO.alter(getApplicationContext(),user);
                 txwValue.setText("R$"+user.getFunds());
+                Log.i(TAG,"User's row update called!");
                 amount = 0;
             }
         }).setNegativeButton(R.string.main_dialog_negative, new DialogInterface.OnClickListener() {
