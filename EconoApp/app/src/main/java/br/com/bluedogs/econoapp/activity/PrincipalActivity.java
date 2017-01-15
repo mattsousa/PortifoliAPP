@@ -47,7 +47,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
         if(user.getName().isEmpty()){
-            // TODO: 13/01/2017 Create custom alert to get user's name
+            // TODO: 13/01/2017 [OK]Create custom alert to get user's name
             user.setName("Matheus");//teste
             UserDAO.insert(getApplicationContext(),user);
             Log.i(TAG,"Data Object Access Called!");
@@ -61,7 +61,7 @@ public class PrincipalActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 11/01/2017 Create a custom alert to get user's value
+                // TODO: 11/01/2017 [OK]Create a custom alert to get user's value
                 stdDialog(true);
                 Log.i(TAG,"btnAdd Click Called!");
             }
@@ -69,7 +69,7 @@ public class PrincipalActivity extends AppCompatActivity {
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 11/01/2017 Create a custom alert to get user's value
+                // TODO: 11/01/2017 [OK]Create a custom alert to get user's value
                 stdDialog(false);
                 Log.i(TAG,"btnRemove Click Called!");
             }
