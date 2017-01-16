@@ -18,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Stack;
 
 import br.com.bluedogs.econoapp.R;
 import br.com.bluedogs.econoapp.db.OperationDAO;
@@ -33,6 +36,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private User user;
     private double amount;
     private final String TAG = "PRINCIPAL_ACTIVITY";
+    private RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,6 @@ public class PrincipalActivity extends AppCompatActivity {
         btnAdd = (Button)findViewById(R.id.main_btn_add);
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
         rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
-
 
         if(user.getName().isEmpty()){
             // TODO: 13/01/2017 [OK]Create custom alert to get user's name
@@ -82,18 +85,26 @@ public class PrincipalActivity extends AppCompatActivity {
         // TODO: 11/01/2017 Get the first 10 last operations from database and create a list
     }
 
+    private void updateList() {
+        ArrayList<Operation> operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
+        if(operationList.size() == 0)
+            txwHistoryResult.setVisibility(View.GONE);
+        Stack<Operation> stack = new Stack<>();
+        Operation[]operations = (operationList.size() < Adapter.DEFAULT_ITENS_NUMBER) ?
+                new Operation[operationList.size()] : new Operation[Adapter.DEFAULT_ITENS_NUMBER];
+        for(Operation it: operationList) stack.push(it);
+        for(int i = 0; !stack.empty();i++) operations[i] = stack.pop();
+        adapter = new Adapter(operations);
+        rcvwHistory.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        Operation[]operations = new Operation[Adapter.DEFAULT_ITENS_NUMBER];
-        ArrayList operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
-        for(int i = 0; i < Adapter.DEFAULT_ITENS_NUMBER;i++){
-            operations[i] = (Operation) operationList.get(operationList.size() - (1+i));
-        }
-        RecyclerView.Adapter adapter = new Adapter(operations);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        updateList();
         rcvwHistory.setLayoutManager(layoutManager);
-        rcvwHistory.setAdapter(adapter);
     }
 
     @Override
@@ -135,10 +146,12 @@ public class PrincipalActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Log.i(TAG,"Dialog Operation OK clicked!");
                 user.makeOperation(amount,add);
+                OperationDAO.insert(getApplicationContext(),user.getLastOperation());
                 UserDAO.alter(getApplicationContext(),user);
                 txwValue.setText("R$"+user.getFunds());
                 Log.i(TAG,"User's row update called!");
                 amount = 0;
+                updateList();
             }
         }).setNegativeButton(R.string.main_dialog_negative, new DialogInterface.OnClickListener() {
             @Override

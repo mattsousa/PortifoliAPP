@@ -28,20 +28,24 @@ public class User {
      * Then, it register this operation on history
      * It calls private methods whatever the add parameter is
      * */
-    public void makeOperation(double value,boolean add){
+    public void makeOperation(double value,boolean add) {
         Operation operation = new Operation();
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         operation.setDateAndTime(format.format(new Date()));
         operation.setValue(value);
-        if(add){
+        if (add) {
             addFunds(value);
             operation.setType(new SimpleAddingOperation());
-        }
-        else{
+        } else {
             removeFunds(value);
             operation.setType(new SimpleRemovingOperation());
         }
         history.add(operation);
+    }
+
+    public Operation getLastOperation(){
+        Operation operation = history.get(history.size()-1);
+        return operation;
     }
 
     private void addFunds(double value){

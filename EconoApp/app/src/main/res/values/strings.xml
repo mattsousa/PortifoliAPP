@@ -22,6 +22,7 @@
     <string name="main_mcustom">...</string>
     <string name="main_custom_ok">Insert</string>
     <string name="main_more">More</string>
+    <string name="main_history_result">No register was found</string>
 
     <!-- Principal Activity Strings -->
 </resources>
