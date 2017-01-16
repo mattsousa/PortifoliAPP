@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,8 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import br.com.bluedogs.econoapp.R;
+import br.com.bluedogs.econoapp.db.OperationDAO;
 import br.com.bluedogs.econoapp.db.UserDAO;
+import br.com.bluedogs.econoapp.model.Operation;
 import br.com.bluedogs.econoapp.model.User;
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -75,6 +80,20 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
         // TODO: 11/01/2017 Get the first 10 last operations from database and create a list
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Operation[]operations = new Operation[Adapter.DEFAULT_ITENS_NUMBER];
+        ArrayList operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
+        for(int i = 0; i < Adapter.DEFAULT_ITENS_NUMBER;i++){
+            operations[i] = (Operation) operationList.get(operationList.size() - (1+i));
+        }
+        RecyclerView.Adapter adapter = new Adapter(operations);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        rcvwHistory.setLayoutManager(layoutManager);
+        rcvwHistory.setAdapter(adapter);
     }
 
     @Override
