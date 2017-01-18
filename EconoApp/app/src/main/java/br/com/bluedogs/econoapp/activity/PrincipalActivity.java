@@ -81,11 +81,11 @@ public class PrincipalActivity extends AppCompatActivity {
         if(operationList.size() == 0)
             txwHistoryResult.setVisibility(View.GONE);
         Stack<Operation> stack = new Stack<>();
-        Operation[]operations = (operationList.size() < Adapter.DEFAULT_ITENS_NUMBER) ?
-                new Operation[operationList.size()] : new Operation[Adapter.DEFAULT_ITENS_NUMBER];
+        Operation[]operations = (operationList.size() < br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER) ?
+                new Operation[operationList.size()] : new Operation[br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER];
         for(Operation it: operationList) stack.push(it);
-        for(int i = 0; !stack.empty() && i<Adapter.DEFAULT_ITENS_NUMBER;i++) operations[i] = stack.pop();
-        adapter = new Adapter(operations);
+        for(int i = 0; !stack.empty() && i< br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER; i++) operations[i] = stack.pop();
+        adapter = new br.com.bluedogs.econoapp.activity.view_components.Adapter(operations);
         rcvwHistory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
