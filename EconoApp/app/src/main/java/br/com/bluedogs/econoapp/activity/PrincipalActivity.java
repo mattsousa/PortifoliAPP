@@ -8,25 +8,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Stack;
 
 import br.com.bluedogs.econoapp.R;
-import br.com.bluedogs.econoapp.db.OperationDAO;
-import br.com.bluedogs.econoapp.db.UserDAO;
-import br.com.bluedogs.econoapp.model.Operation;
-import br.com.bluedogs.econoapp.model.User;
+import br.com.bluedogs.econoapp.db.*;
+import br.com.bluedogs.econoapp.model.*;
 
 public class PrincipalActivity extends AppCompatActivity {
     private TextView txwState,txwValue,txwHistoryResult;
@@ -40,6 +30,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG,"Start onCreate Method");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -93,15 +84,22 @@ public class PrincipalActivity extends AppCompatActivity {
         Operation[]operations = (operationList.size() < Adapter.DEFAULT_ITENS_NUMBER) ?
                 new Operation[operationList.size()] : new Operation[Adapter.DEFAULT_ITENS_NUMBER];
         for(Operation it: operationList) stack.push(it);
-        for(int i = 0; !stack.empty();i++) operations[i] = stack.pop();
+        for(int i = 0; !stack.empty() && i<Adapter.DEFAULT_ITENS_NUMBER;i++) operations[i] = stack.pop();
         adapter = new Adapter(operations);
         rcvwHistory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     @Override
+    protected void onStart() {
+        Log.i(TAG,"Start onStart Method");
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+        Log.i(TAG,"Start onResume Method");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         updateList();
         rcvwHistory.setLayoutManager(layoutManager);
