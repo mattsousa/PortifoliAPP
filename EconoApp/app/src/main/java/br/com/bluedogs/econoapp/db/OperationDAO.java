@@ -73,7 +73,7 @@ public class OperationDAO{
                 " FROM "+DAO.TABELAS[1];
         Cursor cursor = dao.getReadableDatabase().rawQuery(dql,null);
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
                 Operation operation = new Operation();
                 operation.setId(cursor.getInt(cursor.getColumnIndex(coluns[0])));
                 operation.setDateAndTime(cursor.getString(cursor.getColumnIndex(coluns[1])));
@@ -86,7 +86,7 @@ public class OperationDAO{
                 }
                 operation.setValue(cursor.getDouble(cursor.getColumnIndex(coluns[3])));
                 operations.add(operation);
-            }
+            }while(cursor.moveToNext());
         }
         return operations;
     }
@@ -104,7 +104,7 @@ public class OperationDAO{
                 "WHERE "+coluns[1]+" = "+format.format(date);
         Cursor cursor = dao.getReadableDatabase().rawQuery(dql,null);
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
                 Operation operation = new Operation();
                 operation.setId(cursor.getInt(cursor.getColumnIndex(coluns[0])));
                 operation.setDateAndTime(cursor.getString(cursor.getColumnIndex(coluns[1])));
@@ -117,7 +117,7 @@ public class OperationDAO{
                 }
                 operation.setValue(cursor.getDouble(cursor.getColumnIndex(coluns[3])));
                 operations.add(operation);
-            }
+            }while(cursor.moveToNext());
         }
         return operations;
     }
@@ -135,7 +135,7 @@ public class OperationDAO{
         Cursor cursor = dao.getReadableDatabase().rawQuery(dql,null);
         ContentValues values = new ContentValues();
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
                 Operation operation = new Operation();
                 operation.setId(cursor.getInt(cursor.getColumnIndex(coluns[0])));
                 operation.setDateAndTime(cursor.getString(cursor.getColumnIndex(coluns[1])));
@@ -148,7 +148,7 @@ public class OperationDAO{
                 }
                 operation.setValue(cursor.getDouble(cursor.getColumnIndex(coluns[3])));
                 operations.add(operation);
-            }
+            }while(cursor.moveToNext());
         }
         return operations;
     }

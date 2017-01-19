@@ -36,8 +36,6 @@ public class PrincipalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = UserDAO.getUser(getApplicationContext());
-
         txwState = (TextView)findViewById(R.id.main_txw_state);
         txwValue = (TextView)findViewById(R.id.main_txw_value);
         txwHistoryResult = (TextView)findViewById(R.id.main_txw_history_result);
@@ -45,8 +43,10 @@ public class PrincipalActivity extends AppCompatActivity {
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
         rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
 
+        user = UserDAO.getUser(getApplicationContext());
+
         if(user.getName().isEmpty()){
-            // TODO: 13/01/2017 [OK]Create custom alert to get user's name
+            // TODO: 13/01/2017 Create custom alert to get user's name
             user.setName("Matheus");//teste
             UserDAO.insert(getApplicationContext(),user);
             Log.i(TAG,"Data Object Access Called!");
@@ -79,6 +79,8 @@ public class PrincipalActivity extends AppCompatActivity {
     private void updateList() {
         ArrayList<Operation> operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
         if(operationList.size() == 0)
+            txwHistoryResult.setVisibility(View.VISIBLE);
+        else
             txwHistoryResult.setVisibility(View.GONE);
         Stack<Operation> stack = new Stack<>();
         Operation[]operations = (operationList.size() < br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER) ?

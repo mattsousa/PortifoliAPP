@@ -3,6 +3,7 @@ package br.com.bluedogs.econoapp.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 
 import br.com.bluedogs.econoapp.model.User;
@@ -31,11 +32,19 @@ public class UserDAO {
                     " FROM "+DAO.TABELAS[0];
         Cursor cursor = dao.getReadableDatabase().rawQuery(dql,null);
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
                 user.setId(cursor.getInt(0));
                 user.setName(cursor.getString(1));
                 user.setFunds(cursor.getDouble(2));
-            }
+                Log.i("PRINCIPAL_ACTIVITY","");
+                Log.i("PRINCIPAL_ACTIVITY","USER DATABASE");
+                Log.i("PRINCIPAL_ACTIVITY","");
+                Log.i("PRINCIPAL_ACTIVITY","ID:\t\t"+user.getId());
+                Log.i("PRINCIPAL_ACTIVITY","NAME:\t\t"+user.getName());
+                Log.i("PRINCIPAL_ACTIVITY","FUNDS:\t\t"+user.getFunds());
+                Log.i("PRINCIPAL_ACTIVITY","");
+
+            }while(cursor.moveToNext());
         }
         return user;
     }
