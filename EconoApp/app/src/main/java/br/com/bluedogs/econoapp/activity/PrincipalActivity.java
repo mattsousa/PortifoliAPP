@@ -80,16 +80,17 @@ public class PrincipalActivity extends AppCompatActivity {
         ArrayList<Operation> operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
         if(operationList.size() == 0)
             txwHistoryResult.setVisibility(View.VISIBLE);
-        else
+        else{
             txwHistoryResult.setVisibility(View.GONE);
-        Stack<Operation> stack = new Stack<>();
-        Operation[]operations = (operationList.size() < br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER) ?
-                new Operation[operationList.size()] : new Operation[br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER];
-        for(Operation it: operationList) stack.push(it);
-        for(int i = 0; !stack.empty() && i< br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER; i++) operations[i] = stack.pop();
-        adapter = new br.com.bluedogs.econoapp.activity.view_components.Adapter(operations);
-        rcvwHistory.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+            Stack<Operation> stack = new Stack<>();
+            Operation[]operations = (operationList.size() < br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER) ?
+                    new Operation[operationList.size()] : new Operation[br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER];
+            for(Operation it: operationList) stack.push(it);
+            for(int i = 0; !stack.empty() && i< br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER; i++) operations[i] = stack.pop();
+            adapter = new br.com.bluedogs.econoapp.activity.view_components.Adapter(operations);
+            rcvwHistory.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

@@ -44,9 +44,9 @@ public class DAO extends SQLiteOpenHelper{
         ddl.delete(0,ddl.length());
 
         ddl.append("CREATE TABLE "+TABELAS[1]+" (");
-        ddl.append("_id         INTEGER         PRIMARY KEY     AUTOINCREMENT       ,");
+        ddl.append("_id         INTEGER         PRIMARY KEY     AUTOINCREMENT        ,");
         ddl.append("dataEHora   TEXT("+ User.DATE_FORMAT.length()+")     NOT NULL    ,");
-        ddl.append("tipo        CHAR            NOT NULL                            ,");
+        ddl.append("tipo        VARCHAR(3)      NOT NULL                             ,");
         ddl.append("valor       REAL            NOT NULL                             ");
         ddl.append(");");
         sqLiteDatabase.execSQL(ddl.toString());

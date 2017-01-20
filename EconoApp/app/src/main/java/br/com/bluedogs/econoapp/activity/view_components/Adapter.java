@@ -1,5 +1,6 @@
 package br.com.bluedogs.econoapp.activity.view_components;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.ParseException;
+
 import br.com.bluedogs.econoapp.R;
 import br.com.bluedogs.econoapp.model.Operation;
+import br.com.bluedogs.econoapp.model.SimpleAddingOperation;
+import br.com.bluedogs.econoapp.model.SimpleRemovingOperation;
 
 /**
  * Created by Sarah Francis on 15/01/2017.
@@ -34,12 +39,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.btnListMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 15/01/2017 Create a new dialog showing description and some options for removing or editing
+                // TODO: 15/01/2017 [OK]Create a new dialog showing description and some options for removing or editing
             }
         });
-        // TODO: 15/01/2017 Setting a value color according to the operation
-        holder.txwListValue.setText(String.valueOf(operations[position].getValue()));
-        holder.txwListDate.setText(operations[position].getDateAndTime());
+        // TODO: 15/01/2017 [OK]Setting a value color according to the operation
+        // TODO: 19/01/2017 Create a boolean method that returns if a object remove or add funds
+        if(operations[position].getType() != null){
+            if(operations[position].getType().getOperationType() == new SimpleAddingOperation().getOperationType()) {
+                //Change this textview color to green
+                holder.txwListValue.setTextColor(Color.GREEN);
+                holder.txwListValue.setText("+"+String.valueOf(operations[position].getValue()));
+            }
+            else if(operations[position].getType().getOperationType() == new SimpleRemovingOperation().getOperationType()){
+                //Change this textview color to red
+                holder.txwListValue.setTextColor(Color.RED);
+                holder.txwListValue.setText("-"+String.valueOf(operations[position].getValue()));
+            }
+        }
+        try {
+            holder.txwListDate.setText(operations[position].getRecyclerViewDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 
