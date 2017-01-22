@@ -23,6 +23,11 @@
     <string name="main_custom_ok">Insert</string>
     <string name="main_more">More</string>
     <string name="main_history_result">No register was found</string>
+    <string name="main_date_item">dd/MM/yyyy</string>
+    <string name="main_seconds">" seconds ago"</string>
+    <string name="main_minutes">" minutes ago"</string>
+    <string name="main_hours">" hours ago"</string>
+    <string name="main_days">Created at</string>
 
     <!-- Principal Activity Strings -->
 </resources>

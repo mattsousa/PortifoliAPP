@@ -1,0 +1,16 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   EconoApp/.idea/inspectionProfiles/Project_Default.xml
+#	new file:   EconoApp/.idea/inspectionProfiles/profiles_settings.xml
+#	modified:   EconoApp/app/src/main/java/br/com/bluedogs/econoapp/activity/PrincipalActivity.java
+#	modified:   EconoApp/app/src/main/java/br/com/bluedogs/econoapp/activity/view_components/Adapter.java
+#	modified:   EconoApp/app/src/main/java/br/com/bluedogs/econoapp/model/Operation.java
+#	modified:   EconoApp/app/src/main/res/layout/recyclerview_item.xml
+#	modified:   EconoApp/app/src/main/res/values/strings.xml
+#
+

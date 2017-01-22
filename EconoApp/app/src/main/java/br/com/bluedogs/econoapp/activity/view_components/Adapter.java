@@ -57,6 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             }
         }
         try {
+            holder.txwListDate.setText("");
             holder.txwListDate.setText(operations[position].getRecyclerViewDate());
         } catch (ParseException e) {
             e.printStackTrace();

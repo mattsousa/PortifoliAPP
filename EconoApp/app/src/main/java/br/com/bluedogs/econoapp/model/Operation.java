@@ -1,9 +1,14 @@
 package br.com.bluedogs.econoapp.model;
 
+import android.content.res.Resources;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import br.com.bluedogs.econoapp.R;
+import br.com.bluedogs.econoapp.activity.PrincipalActivity;
 
 /**
  * Created by Sarah Francis on 12/01/2017.
@@ -25,19 +30,23 @@ public class Operation {
 
     public String getRecyclerViewDate() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat(User.DATE_FORMAT);
-        SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat newFormat = (SimpleDateFormat) SimpleDateFormat.getDateInstance();
         Date dateDatabase = format.parse(getDateAndTime()),
             dateNow = new Date();
         long miliseconds = dateNow.getTime() - dateDatabase.getTime();
         String dateFormat = "";
+        //If the operation was created before a day the item is gonna be like
+        // Example: "12 seconds ago." or "12 minutes ago."
+        //Else it will be like this
+        // Example: "Created at 12/10/2016"
         if(TimeUnit.MILLISECONDS.toSeconds(miliseconds) < 60){
-            dateFormat = TimeUnit.MILLISECONDS.toSeconds(miliseconds)+" Seconds";
+            dateFormat = TimeUnit.MILLISECONDS.toSeconds(miliseconds)+ PrincipalActivity.resources.getString(R.string.main_seconds);
         }else if(TimeUnit.MILLISECONDS.toMinutes(miliseconds) < 60){
-            dateFormat = TimeUnit.MILLISECONDS.toMinutes(miliseconds)+" Minutes";
+            dateFormat = TimeUnit.MILLISECONDS.toMinutes(miliseconds)+PrincipalActivity.resources.getString(R.string.main_minutes);
         }else if(TimeUnit.MILLISECONDS.toHours(miliseconds) < 24){
-            dateFormat = TimeUnit.MILLISECONDS.toHours(miliseconds)+" Hours";
+            dateFormat = TimeUnit.MILLISECONDS.toHours(miliseconds)+PrincipalActivity.resources.getString(R.string.main_hours);
         }else{
-            dateFormat = "Created at "+newFormat.format(dateDatabase);
+            dateFormat = PrincipalActivity.resources.getString(R.string.main_days)+" "+newFormat.format(dateDatabase);
         }
         return dateFormat;
     }

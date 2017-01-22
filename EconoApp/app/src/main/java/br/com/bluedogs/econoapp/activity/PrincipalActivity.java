@@ -2,6 +2,7 @@ package br.com.bluedogs.econoapp.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private double amount;
     private final String TAG = "PRINCIPAL_ACTIVITY";
     private RecyclerView.Adapter adapter;
+    public static Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class PrincipalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        resources = getResources();
         txwState = (TextView)findViewById(R.id.main_txw_state);
         txwValue = (TextView)findViewById(R.id.main_txw_value);
         txwHistoryResult = (TextView)findViewById(R.id.main_txw_history_result);
