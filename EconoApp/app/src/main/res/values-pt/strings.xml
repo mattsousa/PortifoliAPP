@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EconoApp</string>
+    <string name="action_settings">Configurações</string>
+    <string name="main_add">Inserir quantia</string>
+    <string name="main_coin">R$</string>
+    <string name="main_custom_ok">Inserir</string>
+    <string name="main_days">Criado em</string>
+    <string name="main_dialog_clean">Limpar</string>
+    <string name="main_dialog_name">Informe seu nome</string>
+    <string name="main_dialog_negative">Cancelar</string>
+    <string name="main_dialog_positive">OK</string>
+    <string name="main_dialog_title">Escolha um valor</string>
+    <string name="main_greetings">Olá! Bem-Vindo ao EconoApp</string>
+    <string name="main_history">Histório</string>
+    <string name="main_history_result">Nenhum registro foi encontrado</string>
+    <string name="main_hours">\" horas atrás\"</string>
+    <string name="main_minutes">\" minutos atrás\"</string>
+    <string name="main_more">Mais</string>
+    <string name="main_name">Insira seu nome aqui</string>
+    <string name="main_remove">Remover quantia</string>
+    <string name="main_seconds">\" segundos atrás\"</string>
+    <string name="main_value">R$00,00</string>
+</resources>

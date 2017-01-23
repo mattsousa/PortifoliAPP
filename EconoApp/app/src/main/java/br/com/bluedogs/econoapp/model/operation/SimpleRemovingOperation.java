@@ -1,4 +1,4 @@
-package br.com.bluedogs.econoapp.model;
+package br.com.bluedogs.econoapp.model.operation;
 
 /**
  * Created by Sarah Francis on 12/01/2017.

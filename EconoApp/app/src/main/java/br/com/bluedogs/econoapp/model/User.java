@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.com.bluedogs.econoapp.model.operation.SimpleAddingOperation;
+import br.com.bluedogs.econoapp.model.operation.SimpleRemovingOperation;
+
 /**
  * Created by Sarah Francis on 11/01/2017.
  */

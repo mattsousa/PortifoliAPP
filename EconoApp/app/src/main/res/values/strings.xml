@@ -4,25 +4,25 @@
 
     <!-- Principal Activity Strings -->
     <string name="main_greetings">Hello! Wellcome to EconoApp</string>
-    <string name="main_econohealth">EconoHealth: </string>
-    <string name="main_state">State</string>
-    <string name="main_value">$00,00</string>
+    <string name="main_econohealth" translatable="false">EconoHealth: </string>
+    <string name="main_state" translatable="false">State</string>
+    <string name="main_value">$00.00</string>
     <string name="main_history">History</string>
     <string name="main_add">Add Funds</string>
     <string name="main_remove">Remove Funds</string>
     <string name="main_dialog_title">Pick a value</string>
     <string name="main_dialog_positive">OK</string>
     <string name="main_dialog_negative">Cancel</string>
-    <string name="main_amount">R$00,00</string>
-    <string name="main_m1">1</string>
-    <string name="main_m5">5</string>
-    <string name="main_m10">10</string>
-    <string name="main_m100">100</string>
-    <string name="main_mcustom">...</string>
+    <string name="main_amount" translatable="false">00.00</string>
+    <string name="main_m1" translatable="false">1</string>
+    <string name="main_m5" translatable="false">5</string>
+    <string name="main_m10" translatable="false">10</string>
+    <string name="main_m100" translatable="false">100</string>
+    <string name="main_mcustom" translatable="false">...</string>
     <string name="main_custom_ok">Insert</string>
     <string name="main_more">More</string>
     <string name="main_history_result">No register was found</string>
-    <string name="main_date_item">dd/MM/yyyy</string>
+    <string name="main_date_item" translatable="false">dd/MM/yyyy</string>
     <string name="main_seconds">" seconds ago"</string>
     <string name="main_minutes">" minutes ago"</string>
     <string name="main_hours">" hours ago"</string>

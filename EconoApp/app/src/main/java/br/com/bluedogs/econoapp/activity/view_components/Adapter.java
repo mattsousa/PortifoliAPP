@@ -12,8 +12,8 @@ import java.text.ParseException;
 
 import br.com.bluedogs.econoapp.R;
 import br.com.bluedogs.econoapp.model.Operation;
-import br.com.bluedogs.econoapp.model.SimpleAddingOperation;
-import br.com.bluedogs.econoapp.model.SimpleRemovingOperation;
+import br.com.bluedogs.econoapp.model.operation.SimpleAddingOperation;
+import br.com.bluedogs.econoapp.model.operation.SimpleRemovingOperation;
 
 /**
  * Created by Sarah Francis on 15/01/2017.
