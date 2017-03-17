@@ -31,6 +31,8 @@
     <string name="main_dialog_clean">Clean</string>
     <string name="main_coin">$</string>
     <string name="main_dialog_name">Enter your name</string>
+    <string name="main_wellcome">"Wellcome "</string>
+    <string name="main_wellcome_back">"Name: "</string>
 
     <!-- Principal Activity Strings -->
 </resources>

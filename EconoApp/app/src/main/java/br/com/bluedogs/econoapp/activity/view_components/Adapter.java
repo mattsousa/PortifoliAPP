@@ -15,9 +15,6 @@ import br.com.bluedogs.econoapp.model.Operation;
 import br.com.bluedogs.econoapp.model.operation.SimpleAddingOperation;
 import br.com.bluedogs.econoapp.model.operation.SimpleRemovingOperation;
 
-/**
- * Created by Sarah Francis on 15/01/2017.
- */
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private Operation[] operations;
@@ -36,12 +33,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.btnListMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: 15/01/2017 [OK]Create a new dialog showing description and some options for removing or editing
-            }
-        });
         // TODO: 15/01/2017 [OK]Setting a value color according to the operation
         // TODO: 19/01/2017 Create a boolean method that returns if a object remove or add funds
         if(operations[position].getType() != null){
@@ -71,12 +62,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView txwListValue,txwListDate;
-        private Button btnListMore;
         public ViewHolder(View itemView) {
             super(itemView);
             txwListDate = (TextView)itemView.findViewById(R.id.recycler_txw_date);
             txwListValue = (TextView)itemView.findViewById(R.id.recycler_txw_value);
-            btnListMore = (Button)itemView.findViewById(R.id.recycler_btn_more);
         }
     }
 }

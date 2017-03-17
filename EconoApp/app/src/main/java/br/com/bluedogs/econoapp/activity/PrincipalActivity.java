@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import br.com.bluedogs.econoapp.R;
+import br.com.bluedogs.econoapp.activity.view_components.ItemDecorator;
 import br.com.bluedogs.econoapp.db.*;
 import br.com.bluedogs.econoapp.model.*;
 
@@ -49,6 +50,8 @@ public class PrincipalActivity extends AppCompatActivity {
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
         rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
 
+        rcvwHistory.addItemDecoration(new ItemDecorator(14));
+
         format = new DecimalFormat("#0.00");
         user = UserDAO.getUser(getApplicationContext());
 
@@ -59,7 +62,7 @@ public class PrincipalActivity extends AppCompatActivity {
             Log.i(TAG,"Database Insertion Called!");
         }else{
             txwValue.setText(getString(R.string.main_coin)+format.format(user.getFunds()));
-            Toast.makeText(getApplicationContext(),"Name: "+user.getName(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.main_wellcome_back)+user.getName(),Toast.LENGTH_SHORT).show();
             Log.i(TAG,"Data Object Access Called!");
         }
 
@@ -152,7 +155,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         user.setName(edtName.getText().toString());
                         UserDAO.insert(getApplicationContext(),user);
                         if(UserDAO.getUser(getApplicationContext()).getName().equals(user.getName())){
-                            Toast.makeText(getApplicationContext(),"Wellcome "+user.getName(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),getString(R.string.main_wellcome)+user.getName(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).
