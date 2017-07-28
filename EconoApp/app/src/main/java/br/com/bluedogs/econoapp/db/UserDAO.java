@@ -8,9 +8,6 @@ import android.util.Log;
 
 import br.com.bluedogs.econoapp.model.User;
 
-/**
- * Created by Sarah Francis on 13/01/2017.
- */
 
 public class UserDAO {
     private static final String coluns[] = {"_id","nome","quantia"};
@@ -46,6 +43,7 @@ public class UserDAO {
 
             }while(cursor.moveToNext());
         }
+        cursor.close();
         return user;
     }
 

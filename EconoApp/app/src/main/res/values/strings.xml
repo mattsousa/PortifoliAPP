@@ -33,6 +33,8 @@
     <string name="main_dialog_name">Enter your name</string>
     <string name="main_wellcome">"Wellcome "</string>
     <string name="main_wellcome_back">"Name: "</string>
+    <string name="main_state_bad">CAREFUL!!</string>
+    <string name="main_state_good">Good for spending</string>
 
     <!-- Principal Activity Strings -->
 </resources>

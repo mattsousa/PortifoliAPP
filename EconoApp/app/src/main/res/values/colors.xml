@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorPrimary">@color/amber500</color>
+    <color name="colorPrimaryDark">@color/amber700</color>
+    <color name="colorAccent">@color/blueGrey500</color>
 
+    <color name="amber500">#ffc107</color>
+    <color name="amber700">#ffa000</color>
+    <color name="blueGrey500">#607d8b</color>
 
+    <color name="blueGrey50">#eceff1</color>
 
 </resources>

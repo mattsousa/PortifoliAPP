@@ -14,9 +14,6 @@ import br.com.bluedogs.econoapp.model.operation.SimpleAddingOperation;
 import br.com.bluedogs.econoapp.model.operation.SimpleRemovingOperation;
 import br.com.bluedogs.econoapp.model.User;
 
-/**
- * Created by Sarah Francis on 13/01/2017.
- */
 
 public class OperationDAO{
 
@@ -28,11 +25,7 @@ public class OperationDAO{
         int i = 1;
         values.put(coluns[i], operation.getDateAndTime());
         i+=1;
-        if(operation.getType().getOperationType() == new SimpleAddingOperation().getOperationType()){
-            values.put(coluns[i],""+new SimpleAddingOperation().getOperationType());
-        }else if(operation.getType().getOperationType() == new SimpleRemovingOperation().getOperationType()){
-            values.put(coluns[i],""+new SimpleRemovingOperation().getOperationType());
-        }
+        values.put(coluns[i],""+operation.getOperationType());
         i+=1;
         values.put(coluns[i], operation.getValue());
         dao.getWritableDatabase().insert(DAO.TABELAS[1],null,values);
@@ -54,7 +47,6 @@ public class OperationDAO{
                 String tipo = cursor.getString(cursor.getColumnIndex(coluns[2]));
                 operation.setId(cursor.getInt(cursor.getColumnIndex(coluns[0])));
                 operation.setDateAndTime(cursor.getString(cursor.getColumnIndex(coluns[1])));
-                // TODO: 19/01/2017 Create a factory to Operation supertype
                 if (tipo.equalsIgnoreCase(new SimpleAddingOperation().getOperationType()+"")){
                     operation.setType(new SimpleAddingOperation());
                 }else if(tipo.equalsIgnoreCase(new SimpleRemovingOperation().getOperationType()+"")){
@@ -63,6 +55,7 @@ public class OperationDAO{
                 operation.setValue(cursor.getDouble(cursor.getColumnIndex(coluns[3])));
             }
         }
+        cursor.close();
         return operation;
     }
 
@@ -92,6 +85,7 @@ public class OperationDAO{
                 operations.add(operation);
             }while(cursor.moveToNext());
         }
+        cursor.close();
         return operations;
     }
 
@@ -123,6 +117,7 @@ public class OperationDAO{
                 operations.add(operation);
             }while(cursor.moveToNext());
         }
+        cursor.close();
         return operations;
     }
 
@@ -137,7 +132,6 @@ public class OperationDAO{
                 " FROM "+DAO.TABELAS[1]+
                 " WHERE "+coluns[3]+" = "+value;
         Cursor cursor = dao.getReadableDatabase().rawQuery(dql,null);
-        ContentValues values = new ContentValues();
         if(cursor.moveToFirst()){
             do{
                 Operation operation = new Operation();
@@ -154,6 +148,7 @@ public class OperationDAO{
                 operations.add(operation);
             }while(cursor.moveToNext());
         }
+        cursor.close();
         return operations;
     }
 }

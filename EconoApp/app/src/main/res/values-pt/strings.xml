@@ -22,4 +22,6 @@
     <string name="main_seconds">" segundos atrás"</string>
     <string name="main_value">R$00,00</string>
     <string name="main_wellcome">"Bem-vindo "</string>
+    <string name="main_state_bad">CUIDADO!!</string>
+    <string name="main_state_good">Pode gastar</string>
 </resources>

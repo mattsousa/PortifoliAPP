@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 
 import br.com.bluedogs.econoapp.R;
@@ -33,20 +35,20 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // TODO: 19/01/2017 Create a boolean method that returns if a object remove or add funds
+        NumberFormat format = new DecimalFormat("#0.00");
         if(operations[position].getType() != null){
             if(operations[position].getType().getOperationType() == new SimpleAddingOperation().getOperationType()) {
                 //Change this textview color to green
                 holder.txwListValue.setTextColor(Color.GREEN);
-                holder.txwListValue.setText("+"+String.valueOf(operations[position].getValue()));
+                holder.txwListValue.setText("+"+format.format(operations[position].getValue()));
             }
             else if(operations[position].getType().getOperationType() == new SimpleRemovingOperation().getOperationType()){
                 //Change this textview color to red
                 holder.txwListValue.setTextColor(Color.RED);
-                holder.txwListValue.setText("-"+String.valueOf(operations[position].getValue()));
+                holder.txwListValue.setText("-"+format.format(operations[position].getValue()));
             }
         }
         try {
-            holder.txwListDate.setText("");
             holder.txwListDate.setText(operations[position].getRecyclerViewDate());
         } catch (ParseException e) {
             e.printStackTrace();

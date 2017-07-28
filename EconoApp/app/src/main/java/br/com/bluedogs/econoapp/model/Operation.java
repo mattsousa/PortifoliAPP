@@ -46,7 +46,9 @@ public class Operation {
         return dateFormat;
     }
 
-
+    public String getOperationType(){
+        return ""+getType().getOperationType();
+    }
 
     public long getId() {
         return id;

@@ -49,7 +49,7 @@ public class PrincipalActivity extends AppCompatActivity {
         btnAdd = (Button)findViewById(R.id.main_btn_add);
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
 
-        rcvwHistory.addItemDecoration(new ItemDecorator(10));
+        rcvwHistory.addItemDecoration(new ItemDecorator(15));
         format = new DecimalFormat("#0.00");
         format.setRoundingMode(RoundingMode.FLOOR);
         user = UserDAO.getUser(getApplicationContext());
@@ -70,6 +70,7 @@ public class PrincipalActivity extends AppCompatActivity {
                     getApplicationContext(),
                     getString(R.string.main_wellcome_back)+user.getName(),
                     Toast.LENGTH_SHORT).show();
+
             Log.i(TAG,"Data Object Access Called!");
         }
 
@@ -96,7 +97,17 @@ public class PrincipalActivity extends AppCompatActivity {
         Log.i(TAG,"Start onResume Method");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         updateList();
+        updateState();
         rcvwHistory.setLayoutManager(layoutManager);
+    }
+
+    private void updateState(){
+        if(user.getFunds() > 0.0d)
+            txwState.setText(getString(R.string.main_state_good));
+        else{
+            txwState.setText(getString(R.string.main_state_bad));
+        }
+        Log.i(TAG,"Updated state");
     }
 
     protected AlertDialog stdDialogName(){
@@ -152,10 +163,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
                 OperationDAO.insert(getApplicationContext(),user.getLastOperation());
                 UserDAO.alter(getApplicationContext(),user);
-                txwValue.setText(getString(R.string.main_coin)+user.getFunds());
+                txwValue.setText(getString(R.string.main_coin)+format.format(user.getFunds()));
                 Log.i(TAG,"User's row update called!");
                 amount = 0;
                 updateList();
+                updateState();
             }
         }).setNegativeButton(R.string.main_dialog_negative, new DialogInterface.OnClickListener() {
             @Override
