@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Stack;
 
 import br.com.bluedogs.econoapp.R;
 import br.com.bluedogs.econoapp.activity.view_components.ItemDecorator;
+import br.com.bluedogs.econoapp.activity.view_components.OperationAdapter;
 import br.com.bluedogs.econoapp.db.*;
 import br.com.bluedogs.econoapp.model.*;
 
@@ -39,37 +41,41 @@ public class PrincipalActivity extends AppCompatActivity {
         Log.i(TAG,"Start onCreate Method");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        globalAssigments();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Button btnAdd,btnRemove;
         setSupportActionBar(toolbar);
-        resources = getResources();
-        txwState = (TextView)findViewById(R.id.main_txw_state);
-        txwValue = (TextView)findViewById(R.id.main_txw_value);
-        txwHistoryResult = (TextView)findViewById(R.id.main_txw_history_result);
         btnAdd = (Button)findViewById(R.id.main_btn_add);
         btnRemove = (Button)findViewById(R.id.main_btn_remove);
-        rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
 
-        rcvwHistory.addItemDecoration(new ItemDecorator(14));
-
+        rcvwHistory.addItemDecoration(new ItemDecorator(10));
         format = new DecimalFormat("#0.00");
+        format.setRoundingMode(RoundingMode.FLOOR);
         user = UserDAO.getUser(getApplicationContext());
 
+
+        //User's first access
         if(user.getName().isEmpty()){
-            // TODO: 13/01/2017 Create custom alert to get user's name
             stdDialogName().show();
             Log.i(TAG,"Data Object Access Called!");
             Log.i(TAG,"Database Insertion Called!");
-        }else{
+        }
+
+        //User's not first access :D
+        else{
+            // TODO: 28/07/2017 Fix Rounding on txwValue and history itens
             txwValue.setText(getString(R.string.main_coin)+format.format(user.getFunds()));
-            Toast.makeText(getApplicationContext(),getString(R.string.main_wellcome_back)+user.getName(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    getApplicationContext(),
+                    getString(R.string.main_wellcome_back)+user.getName(),
+                    Toast.LENGTH_SHORT).show();
             Log.i(TAG,"Data Object Access Called!");
         }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 11/01/2017 [OK]Create a custom alert to get user's value
                 stdDialogValue(true);
                 Log.i(TAG,"btnAdd Click Called!");
             }
@@ -77,35 +83,11 @@ public class PrincipalActivity extends AppCompatActivity {
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 11/01/2017 [OK]Create a custom alert to get user's value
                 stdDialogValue(false);
                 Log.i(TAG,"btnRemove Click Called!");
             }
         });
         // TODO: 11/01/2017 Get the first 10 last operations from database and create a list
-    }
-
-    private void updateList() {
-        ArrayList<Operation> operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
-        if(operationList.size() == 0)
-            txwHistoryResult.setVisibility(View.VISIBLE);
-        else{
-            txwHistoryResult.setVisibility(View.GONE);
-            Stack<Operation> stack = new Stack<>();
-            Operation[]operations = (operationList.size() < br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER) ?
-                    new Operation[operationList.size()] : new Operation[br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER];
-            for(Operation it: operationList) stack.push(it);
-            for(int i = 0; !stack.empty() && i< br.com.bluedogs.econoapp.activity.view_components.Adapter.DEFAULT_ITENS_NUMBER; i++) operations[i] = stack.pop();
-            adapter = new br.com.bluedogs.econoapp.activity.view_components.Adapter(operations);
-            rcvwHistory.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        Log.i(TAG,"Start onStart Method");
-        super.onStart();
     }
 
     @Override
@@ -115,29 +97,6 @@ public class PrincipalActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         updateList();
         rcvwHistory.setLayoutManager(layoutManager);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Log.i(TAG,"Settings Click Called!");
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     protected AlertDialog stdDialogName(){
@@ -266,5 +225,38 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
         return builder.show();
+    }
+
+    private void globalAssigments(){
+        resources = getResources();
+        txwState = (TextView)findViewById(R.id.main_txw_state);
+        txwValue = (TextView)findViewById(R.id.main_txw_value);
+        txwHistoryResult = (TextView)findViewById(R.id.main_txw_history_result);
+        rcvwHistory = (RecyclerView)findViewById(R.id.main_rcvw_history);
+    }
+
+    private void updateList() {
+        ArrayList<Operation> operationList = (ArrayList<Operation>) OperationDAO.getOperations(getApplicationContext());
+        if(operationList.size() == 0)
+            txwHistoryResult.setVisibility(View.VISIBLE);
+        else{
+            txwHistoryResult.setVisibility(View.GONE);
+            Stack<Operation> stack = new Stack<>();
+
+            // Get the all operations.
+            // If there are less than the default limit of itens, show them
+            // Else, show only the most recent until the default limit of itens
+            Operation[]operations =
+                    (operationList.size() < OperationAdapter.DEFAULT_ITENS_NUMBER) ?
+                            new Operation[operationList.size()] :
+                            new Operation[OperationAdapter.DEFAULT_ITENS_NUMBER];
+
+            for(Operation it: operationList) stack.push(it);
+            for(int i = 0; !stack.empty() && i< OperationAdapter.DEFAULT_ITENS_NUMBER; i++)
+                operations[i] = stack.pop();
+            adapter = new OperationAdapter(operations);
+            rcvwHistory.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

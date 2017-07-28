@@ -9,10 +9,6 @@ import br.com.bluedogs.econoapp.R;
 import br.com.bluedogs.econoapp.activity.PrincipalActivity;
 import br.com.bluedogs.econoapp.model.operation.OperationType;
 
-/**
- * Created by Sarah Francis on 12/01/2017.
- */
-
 public class Operation {
     private long id;
     private String dateAndTime;

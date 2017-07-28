@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -16,10 +15,10 @@ import br.com.bluedogs.econoapp.model.operation.SimpleAddingOperation;
 import br.com.bluedogs.econoapp.model.operation.SimpleRemovingOperation;
 
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.ViewHolder> {
     private Operation[] operations;
     public static final int DEFAULT_ITENS_NUMBER = 10;
-    public Adapter(Operation[] operations){
+    public OperationAdapter(Operation[] operations){
         this.operations = operations;
     }
 
@@ -33,7 +32,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // TODO: 15/01/2017 [OK]Setting a value color according to the operation
         // TODO: 19/01/2017 Create a boolean method that returns if a object remove or add funds
         if(operations[position].getType() != null){
             if(operations[position].getType().getOperationType() == new SimpleAddingOperation().getOperationType()) {
